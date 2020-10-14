@@ -1,5 +1,5 @@
 require 'bike'
 
 RSpec.describe Bike do
-	it {respond_to(:working?)}	
+	it {is_expedted.to respond_to(:working?)}	
 end
