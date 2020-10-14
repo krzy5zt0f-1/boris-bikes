@@ -1,21 +1,23 @@
 require_relative '../lib/docking_station'
 
-
 RSpec.describe DockingStation do
 	it {is_expected.to respond_to(:release_bike)}
-
-	it "releases a bike" do
-		bike = subject.release_bike
-		expect(bike).to be_instance_of Bike
+	it "errors in no bike is available" do
+		expect{subject.release_bike}.to raise_error "Error: No bikes available"
+	end
+	it "releases a bike if one is available" do
+		bike = Bike.new
+		subject.dock(bike)
+		expect(subject.release_bike).to eq bike
 	end
 	it "bike is working" do
-		bike = subject.release_bike
+		bike = Bike.new
 		expect(bike.working?).to eq true
 	end
 	describe '#docking' do
 		it "docks a bike to be returned" do
 			# Arrange
-			bike = subject.release_bike
+			bike = Bike.new
 			bikes = subject.instance_variable_get("@array_of_bikes")
 			#Act
 			subject.dock(bike)
@@ -26,7 +28,7 @@ RSpec.describe DockingStation do
 	describe '#show_bikes' do
 		it "returns non-empty array of bikes" do
 			# Arrange
-			bike = subject.release_bike
+			bike = Bike.new
 			#Act
 			subject.dock(bike)
 			#Assert
