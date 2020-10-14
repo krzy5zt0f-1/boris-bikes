@@ -15,7 +15,7 @@ RSpec.describe DockingStation do
 		expect(bike.working?).to eq true
 	end
 	describe '#docking' do
-		it "docks a bike to be returned" do
+		it "docks a bike to be returned when dock is empty" do
 			# Arrange
 			bike = Bike.new
 			bikes = subject.instance_variable_get("@array_of_bikes")
@@ -24,6 +24,11 @@ RSpec.describe DockingStation do
 			#Assert
 			expect(bikes).to eq [bike]
 		end
+		it "errors when docking a bike ot a full dock" do
+			subject.docking_capacity.times {subject.dock(Bike.new)}
+			expect{subject.dock(Bike.new)}.to raise_error "Docking station at maximum capacity"
+		end
+
 	end
 	describe '#show_bikes' do
 		it "returns non-empty array of bikes" do
