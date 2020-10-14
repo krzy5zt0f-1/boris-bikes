@@ -2,9 +2,9 @@ require_relative './bike'
 
 class DockingStation
 	attr_reader :DEFAULT_CAPACITY
-	def initialize
+	def initialize(capacity = 20)
 		@array_of_bikes = []
-		@DEFAULT_CAPACITY = 20
+		@DEFAULT_CAPACITY = capacity
 	end
 	def release_bike
 		if empty?
