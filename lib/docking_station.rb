@@ -7,20 +7,34 @@ class DockingStation
 		@docking_capacity = 20
 	end
 	def release_bike
-		if @array_of_bikes.empty?
+		if empty?
 			raise "Error: No bikes available"
 		else
 			@array_of_bikes.pop
 		end
 	end
 	def dock(input)
-		if @array_of_bikes.size < @docking_capacity
-			@array_of_bikes.push(input)
-		else
+		if full?
 			raise "Docking station at maximum capacity"
+		else
+			@array_of_bikes.push(input)
 		end
 	end
 	def show_bikes
 		@array_of_bikes
+	end
+
+	private
+
+	def full?
+		if @array_of_bikes.size >= @docking_capacity
+			return true
+		end
+	end
+
+	def empty?
+		if @array_of_bikes.length == 0
+			return true
+		end
 	end
 end
