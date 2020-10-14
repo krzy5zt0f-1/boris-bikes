@@ -4,7 +4,7 @@ class DockingStation
 	attr_reader :docking_capacity
 	def initialize
 		@array_of_bikes = []
-		@docking_capacity = 1
+		@docking_capacity = 20
 	end
 	def release_bike
 		if @array_of_bikes.empty?
