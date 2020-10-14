@@ -25,7 +25,7 @@ RSpec.describe DockingStation do
 			expect(bikes).to eq [bike]
 		end
 		it "errors when docking a bike ot a full dock" do
-			subject.docking_capacity.times {subject.dock(Bike.new)}
+			subject.DEFAULT_CAPACITY.times {subject.dock(Bike.new)}
 			expect{subject.dock(Bike.new)}.to raise_error "Docking station at maximum capacity"
 		end
 
